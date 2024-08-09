@@ -33,5 +33,5 @@ Before you begin, ensure you have the following installed on your machine:
 
 - [Node.js](https://nodejs.org/) (v14 or later)
 - [npm](https://www.npmjs.com/) (Node Package Manager, included with Node.js)
-- [Express](https://expressjs.com/) (NestJS' Documentation)
+- [Express](https://expressjs.com/) (Express Documentation)
 - [Git](https://git-scm.com/)
