@@ -36,15 +36,15 @@ model User {
 }
 
 model Profile {
-  profileId    String    @id @default(cuid()) @map("profile_id")
-  avatarUrl    String?   @map("avatar_url")
-  firstName    String    @map("first_name")
-  lastName     String    @map("last_name")
-  dateOfBirth  DateTime? @map("date_of_birth")
+  profileId    String     @id @default(cuid()) @map("profile_id")
+  avatarUrl    String?    @map("avatar_url")
+  firstName    String?    @map("first_name")
+  lastName     String?    @map("last_name")
+  dateOfBirth  DateTime?  @map("date_of_birth")
   gender       String?   
   bio          String?
-  userId       String    @unique @map("user_id")
-  user         User      @relation(fields: [userId], references: [userId])
+  userId       String     @unique @map("user_id")
+  user         User       @relation(fields: [userId], references: [userId], onDelete: Cascade)
   
   @@map("profile")
 }
