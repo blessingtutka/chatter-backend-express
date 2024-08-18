@@ -3,7 +3,6 @@
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,24 +12,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
+enum UserType {
+  ADMIN       @map("admin")
+  MODERATOR   @map("moderator")
+  USER        @map("user")
+}
 
 model User {
-  userId    String   @id @default(cuid())
-  username  String   @unique
-  email     String   @unique
-  password  String
-  profile   Profile?
+  userId      String    @id @default(cuid()) @map("user_id")
+  username    String    @unique
+  email       String    @unique
+  type        UserType  @default(USER)
+  password    String
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  lastLoginAt DateTime? @map("last_login_at")
+  isActive    Boolean   @default(true) @map("is_active")
+  profile     Profile?
+  
+  @@index([username])
+  @@index([email])
   @@map("user")
 }
 
 model Profile {
-  profileId String  @id @default(cuid())
-  firstName String
-  lastName  String
-  bio       String?
-  avatarUrl String?
-  userId    String  @unique
-  user      User    @relation(fields: [userId], references: [userId])
+  profileId    String    @id @default(cuid()) @map("profile_id")
+  avatarUrl    String?   @map("avatar_url")
+  firstName    String    @map("first_name")
+  lastName     String    @map("last_name")
+  dateOfBirth  DateTime? @map("date_of_birth")
+  gender       String?   
+  bio          String?
+  userId       String    @unique @map("user_id")
+  user         User      @relation(fields: [userId], references: [userId])
+  
   @@map("profile")
 }
