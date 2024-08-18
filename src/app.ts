@@ -1,5 +1,6 @@
 import express, { Application } from 'express';
 import cors from 'cors';
+import authRoutes from './modules/auth/auth.routes';
 
 const app: Application = express();
 
@@ -11,6 +12,9 @@ app.use(express.json());
 app.use((req, res, next) => {
   res.status(200).json({ message: 'Chatter api responding' });
 });
+
+//Applications Routes
+app.use('/auth', authRoutes);
 
 //Not Found Routes
 app.use((req, res, next) => {
