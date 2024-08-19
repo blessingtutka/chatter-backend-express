@@ -26,7 +26,7 @@ const register = async (res: Response, req: Request) => {
   }
 };
 
-async function login(req: Request, res: Response) {
+const login = async (res: Response, req: Request) => {
   const { email, password } = req.body;
   const errors = validateLogin(req.body);
   if (errors.length > 0) return res.status(422).json({ errors });
@@ -51,6 +51,6 @@ async function login(req: Request, res: Response) {
     const response = HttpResponse.badRequest('Authentication failed');
     return response.send(res);
   }
-}
+};
 
 export { register, login };
