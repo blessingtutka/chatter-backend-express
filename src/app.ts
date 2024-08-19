@@ -8,7 +8,7 @@ const app: Application = express();
 app.use(cors());
 app.use(express.json());
 
-//Applications Routes
+//Application Routes
 app.use('/auth', authRoutes);
 
 //Home Routes
