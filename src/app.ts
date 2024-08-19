@@ -8,13 +8,13 @@ const app: Application = express();
 app.use(cors());
 app.use(express.json());
 
+//Applications Routes
+app.use('/auth', authRoutes);
+
 //Home Routes
 app.use((req, res, next) => {
   res.status(200).json({ message: 'Chatter api responding' });
 });
-
-//Applications Routes
-app.use('/auth', authRoutes);
 
 //Not Found Routes
 app.use((req, res, next) => {
