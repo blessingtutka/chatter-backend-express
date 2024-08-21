@@ -56,6 +56,26 @@ class HttpResponse {
     return new HttpResponse(status_code, 'error', message, null, 'Not Found');
   }
 
+  static unAuthorized(
+    message: string = 'Not allowed',
+    status_code: number = 401,
+  ): HttpResponse {
+    return new HttpResponse(
+      status_code,
+      'error',
+      message,
+      null,
+      'Unauthorized',
+    );
+  }
+
+  static forbidden(
+    message: string = 'Permission denied',
+    status_code: number = 403,
+  ): HttpResponse {
+    return new HttpResponse(status_code, 'error', message, null, 'Forbidden');
+  }
+
   toJson() {
     if (this.status === 'error') {
       return {
