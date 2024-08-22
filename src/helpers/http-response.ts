@@ -29,6 +29,14 @@ class HttpResponse {
     return new HttpResponse(status_code, 'success', message, data);
   }
 
+  static created(
+    data: any = null,
+    message: string = 'Post was successful',
+    status_code: number = 201,
+  ): HttpResponse {
+    return new HttpResponse(status_code, 'success', message, data);
+  }
+
   static serverError(
     message: string = 'An error occurred',
     status_code: number = 500,
@@ -77,22 +85,22 @@ class HttpResponse {
   }
 
   toJson() {
-    if (this.status === 'error') {
-      return {
-        status_code: this.status_code,
-        status: this.status,
-        error: {
-          code: this.error_code,
-          message: this.message,
-        },
-      };
-    }
-    return {
+    const response: any = {
       status_code: this.status_code,
       status: this.status,
       message: this.message,
-      data: this.data,
     };
+
+    if (this.status === 'error') {
+      response.error = {
+        code: this.error_code,
+        message: this.message,
+      };
+    } else if (this.data !== null) {
+      response.data = this.data;
+    }
+
+    return response;
   }
 
   send(res: Response) {
