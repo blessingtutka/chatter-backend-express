@@ -20,6 +20,7 @@ enum UserType {
 
 model User {
   userId      String    @id @default(cuid()) @map("user_id")
+  googleId    String?   @map("google_id") @unique
   username    String    @unique
   email       String    @unique
   type        UserType  @default(USER)
