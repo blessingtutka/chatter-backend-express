@@ -4,17 +4,19 @@ import {
   validateRegistration,
   validateLogin,
 } from '../../validator/auth.validators';
+import { generateToken } from '../../utils/generate-token';
 import HttpResponse from '../../helpers/http-response';
 
-const register = async (res: Response, req: Request) => {
+const register = async (req: Request, res: Response) => {
   const data = req.body;
   const errors = await validateRegistration(req.body);
   if (errors.length > 0) return res.status(422).json({ errors });
 
   try {
     const user = await authService.createAccount(data);
+    const token = generateToken(user);
     const response = HttpResponse.success(
-      { ...user },
+      { access_token: token, user: user },
       'Accound created successfully',
     );
     return response.send(res);
@@ -24,7 +26,7 @@ const register = async (res: Response, req: Request) => {
   }
 };
 
-const login = async (res: Response, req: Request) => {
+const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   const errors = validateLogin(req.body);
   if (errors.length > 0) return res.status(422).json({ errors });
@@ -33,9 +35,10 @@ const login = async (res: Response, req: Request) => {
     const user = await authService.verifyUser(email, password);
 
     if (user) {
-      // const token = generateToken(user);
+      const token = generateToken(user);
       const response = HttpResponse.success(
         {
+          access_token: token,
           user: user,
         },
         'Login successful',
@@ -51,4 +54,8 @@ const login = async (res: Response, req: Request) => {
   }
 };
 
-export { register, login };
+const profile = async (req: Request, res: Response) => {
+  const response = HttpResponse.success('Welcome to profile page');
+  return response.send(res);
+};
+export { register, login, profile };
