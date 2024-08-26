@@ -6,6 +6,8 @@ interface Config {
   databaseUrl: string;
   jwtSecret: string;
   sessionSecret: string;
+  googleClientId: string;
+  googleClientSecret: string;
 }
 
 const config: Config = {
@@ -13,6 +15,8 @@ const config: Config = {
   databaseUrl: process.env.DATABASE_URL || '',
   jwtSecret: process.env.JWT_SECRET || 'chatter-secret-key',
   sessionSecret: process.env.SESSION_SECRET || 'csession-secret-key',
+  googleClientId: process.env.GOOGLE_CLIENT_ID || 'clientID',
+  googleClientSecret: process.env.GOOGLE_CLIENT_SECRET || 'clientSecret',
 };
 
 export default config;
