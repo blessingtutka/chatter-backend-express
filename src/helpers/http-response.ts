@@ -104,10 +104,10 @@ class HttpResponse {
       };
     } else if (this.status === 'success') {
       response.message = this.message;
-    } else if (this.data !== null) {
-      response.data = this.data;
+      if (this.data) {
+        response.data = this.data;
+      }
     }
-
     return response;
   }
 
