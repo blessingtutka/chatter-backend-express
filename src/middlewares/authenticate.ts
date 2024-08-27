@@ -48,6 +48,14 @@ const authenticateGoogle = (
   );
 };
 
+const authenticateFacebook = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  passport.authenticate('facebook', { scope: ['email'] })(req, res, next);
+};
+
 const authenticateGoogleCallback = (
   req: Request,
   res: Response,
@@ -71,6 +79,34 @@ const authenticateGoogleCallback = (
   )(req, res, next);
 };
 
+const authenticateFacebookCallback = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  passport.authenticate(
+    'facebook',
+    { failureRedirect: '/', scope: ['email', 'profile'] },
+    (err: any, user: any, info: any) => {
+      if (err) {
+        const response = HttpResponse.unAuthorized('Authentication error');
+        return response.send(res);
+      }
+      if (!user) {
+        const response = HttpResponse.unAuthorized('Unauthorized user');
+        return response.send(res);
+      }
+      req.user = user;
+      next();
+    },
+  )(req, res, next);
+};
+
 export default authenticate;
 
-export { authenticateGoogle, authenticateGoogleCallback };
+export {
+  authenticateGoogle,
+  authenticateFacebook,
+  authenticateGoogleCallback,
+  authenticateFacebookCallback,
+};
