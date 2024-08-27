@@ -1,6 +1,5 @@
 import { creategoogleAccount, getUserByGoogleId } from '../oauth.service';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-import { validateGoogleAuth } from '../../../validator/auth.validators';
 import { generateToken } from '../../../utils/generate-token';
 import config from '../../../config/server.config';
 
