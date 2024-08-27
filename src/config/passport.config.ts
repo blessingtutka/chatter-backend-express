@@ -1,6 +1,7 @@
 import passport from 'passport';
 import { Response, Request } from 'express';
 import googleStartegy from '../modules/auth/strategies/google.strategy';
+import facebookStartegy from '../modules/auth/strategies/facebook.strategy';
 import jwtStrategy from '../modules/auth/strategies/jwt.strategy';
 
 export interface User {
@@ -24,5 +25,8 @@ passport.use(googleStartegy);
 
 // JWT strategy configuration
 passport.use(jwtStrategy);
+
+// Facebook strategy configuration
+passport.use(facebookStartegy);
 
 export default passport;
