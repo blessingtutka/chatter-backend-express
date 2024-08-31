@@ -1,10 +1,12 @@
-import express, { Application, Request, Response } from 'express';
+import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import passport from 'passport';
 import session from 'express-session';
+import swaggerUi from 'swagger-ui-express';
 import config from './config/server.config';
 import HttpResponse from './helpers/http-response';
 import authRoutes from './modules/auth/auth.routes';
+import swaggerDocument from '../API_SCHEMA.json';
 
 const app: Application = express();
 
@@ -25,8 +27,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// API DOC
+app.use('/api/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Application Routes
-app.use('/auth', authRoutes);
+app.use('api/auth', authRoutes);
 
 // Home Routes
 app.get('/', (req: Request, res: Response) => {
