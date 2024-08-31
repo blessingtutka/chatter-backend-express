@@ -5,6 +5,7 @@
   "main": "./src/main.ts",
   "scripts": {
     "build": "tsc",
+    "start": "node ./dist/main.js",
     "dev": "npx tsx watch src/main.ts",
     "migrate": "npx prisma migrate deploy",
     "generate": "npx prisma generate",
