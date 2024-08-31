@@ -9,6 +9,7 @@ A simple chat application in express
 ```
 |--- src
 |    |--- config
+     |--- helpers
 |    |--- modules
 |    |--- shared
 |    |--- utils
@@ -16,6 +17,7 @@ A simple chat application in express
 |    |--- main.ts
 |--- .env.local
 |--- .gitignore
+|--- API_SCHEMA.json
 |--- package.json
 |--- tsconfig.json
 ```
@@ -26,6 +28,15 @@ A simple chat application in express
 - TypeScript
 - Express
 - ts-node-dev
+- Swagger UI
+
+## LIVE DEMO
+
+- [Chatter backend](https://chatter-backend.netlify.app/)
+
+## API DOCUMENTATION
+
+- [API DOC](https://chatter-backend.netlify.app/api/doc)
 
 ## Getting Started
 
