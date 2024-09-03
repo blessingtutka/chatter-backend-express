@@ -32,7 +32,7 @@ const login = async (req: Request, res: Response) => {
   if (errors.length > 0) return res.status(422).json({ errors });
 
   try {
-    const user = await authService.verifyUser(email, password);
+    const user = await authService.validateUserAndPassword(email, password);
 
     if (user) {
       const token = generateToken(user);

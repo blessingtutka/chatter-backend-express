@@ -89,7 +89,7 @@ const getUserByEmail = async (email: string) => {
   }
 };
 
-async function verifyUser(email: string, password: string) {
+async function validateUserAndPassword(email: string, password: string) {
   try {
     const user = await userModel.findUnique({
       where: {
@@ -109,4 +109,10 @@ async function verifyUser(email: string, password: string) {
   }
 }
 
-export { createAccount, getUser, getUserByEmail, verifyUser, deleteAccount };
+export {
+  createAccount,
+  getUser,
+  getUserByEmail,
+  validateUserAndPassword,
+  deleteAccount,
+};
