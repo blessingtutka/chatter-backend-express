@@ -1,12 +1,12 @@
 import { creategoogleAccount, getUserByGoogleId } from '../oauth.service';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { generateToken } from '../../../utils/generate-token';
-import config from '../../../config/server.config';
+import authConfig from '../../../config/auth.config';
 
 const googleStartegy = new GoogleStrategy(
   {
-    clientID: config.googleClientId,
-    clientSecret: config.googleClientSecret,
+    clientID: authConfig.google.clientId,
+    clientSecret: authConfig.google.clientSecret,
     callbackURL: '/auth/google/callback',
   },
   async (accessToken, refreshToken, profile, done) => {

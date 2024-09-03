@@ -3,7 +3,7 @@ import cors from 'cors';
 import passport from 'passport';
 import session from 'express-session';
 import swaggerUi from 'swagger-ui-express';
-import config from './config/server.config';
+import authConfig from './config/auth.config';
 import HttpResponse from './helpers/http-response';
 import authRoutes from './modules/auth/auth.routes';
 import swaggerDocument from '../API_SCHEMA.json';
@@ -17,7 +17,7 @@ app.use(express.json());
 // Session Manager
 app.use(
   session({
-    secret: config.sessionSecret,
+    secret: authConfig.session.secret,
     resave: false,
     saveUninitialized: true,
   }),

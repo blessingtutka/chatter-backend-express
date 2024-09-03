@@ -3,9 +3,8 @@ import {
   ExtractJwt,
   StrategyOptions,
 } from 'passport-jwt';
-import config from '../../../config/server.config';
-
-import { getUser } from '../auth.service';
+import authConfig from '../../../config/auth.config';
+import { getUser } from '../../user/user.service';
 
 interface JwtPayload {
   userId: string;
@@ -14,7 +13,7 @@ interface JwtPayload {
 
 const opts: StrategyOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: config.jwtSecret,
+  secretOrKey: authConfig.jwt.secret,
 };
 
 const jwtStrategy = new JwtStrategy(

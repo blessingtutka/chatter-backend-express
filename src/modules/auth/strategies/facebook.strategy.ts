@@ -1,13 +1,14 @@
 import { Strategy as FacebookStrategy } from 'passport-facebook';
-import { createAccount, getUserByEmail } from '../auth.service';
+import { createAccount } from '../auth.service';
+import { getUserByEmail } from '../../user/user.service';
 import { Request, Response, NextFunction } from 'express';
 import { generateToken } from '../../../utils/generate-token';
-import config from '../../../config/server.config';
+import authConfig from '../../../config/auth.config';
 
 const facebookStartegy = new FacebookStrategy(
   {
-    clientID: config.facebookClientId,
-    clientSecret: config.facebookClientSecret,
+    clientID: authConfig.facebook.clientId,
+    clientSecret: authConfig.facebook.clientSecret,
     callbackURL: `/auth/facebook/callback`,
     profileFields: ['id', 'emails', 'name'],
     passReqToCallback: true,

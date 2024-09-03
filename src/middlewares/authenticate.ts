@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import passport from '../config/passport.config';
 import isExpiredToken from '../utils/isexpired-token';
 import extractTokenFromHeader from '../utils/extract-token';
-import config from '../config/server.config';
+import authConfig from '../config/auth.config';
 import HttpResponse from '../helpers/http-response';
 
 interface AuthenticatedRequest extends Request {
@@ -23,7 +23,7 @@ const authenticate = (
   }
 
   try {
-    const payload = jwt.verify(token, config.jwtSecret);
+    const payload = jwt.verify(token, authConfig.jwt.secret);
     if (isExpiredToken(payload)) {
       const response = HttpResponse.unAuthorized('token expires');
       return response.send(res);
