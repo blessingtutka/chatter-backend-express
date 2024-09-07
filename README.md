@@ -32,11 +32,11 @@ A simple chat application in express
 
 ## LIVE DEMO
 
-- [Chatter backend](https://chatter-backend.netlify.app/)
+- [Chatter backend](https://chatter-backend-express.onrender.com/)
 
 ## API DOCUMENTATION
 
-- [API DOC](https://chatter-backend.netlify.app/api/doc)
+- [API DOC](https://chatter-backend-express.onrender.com/api/doc)
 
 ## Getting Started
 
