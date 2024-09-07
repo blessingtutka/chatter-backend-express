@@ -1,5 +1,5 @@
 import { UserType } from '../config/db.config';
-import { getUserByEmail } from '../modules/auth/auth.service';
+import { getUserByEmail } from '../modules/user/user.service';
 import { ValidationError } from './interfaces';
 
 interface UserInput {
@@ -42,4 +42,11 @@ const validateLogin = (user: Partial<UserInput>): ValidationError[] => {
   return errors;
 };
 
-export { validateRegistration, validateLogin };
+const validateReset = (user: Partial<UserInput>): ValidationError[] => {
+  const errors: ValidationError[] = [];
+  if (!user.email)
+    errors.push({ field: 'email', message: 'Email is required' });
+  return errors;
+};
+
+export { validateRegistration, validateLogin, validateReset };
