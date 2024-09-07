@@ -7,15 +7,14 @@ export const handlePasswordResetRequest = async (
   req: Request,
   res: Response,
 ) => {
-  const { email } = req.body;
+  const { email, firstName } = req.body;
   const resetLink = 'https://chatter.com/reset-password?token=chatterToken';
-  const firstName = 'Sinan';
 
   const errors = await validateReset(req.body);
   if (errors.length > 0) return res.status(422).json({ errors });
 
   try {
-    await mailService.sendPasswordResetEmail(email, resetLink, firstName);
+    await mailService.sendPasswordResetEmail(email, resetLink, firstName || '');
     const response = HttpResponse.success(
       null,
       'Password reset email sent successfully',
