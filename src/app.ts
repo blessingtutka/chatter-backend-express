@@ -6,6 +6,7 @@ import swaggerUi from 'swagger-ui-express';
 import authConfig from './config/auth.config';
 import HttpResponse from './helpers/http-response';
 import authRoutes from './modules/auth/auth.routes';
+import emailRoutes from './modules/email/email.routes';
 import swaggerDocument from '../API_SCHEMA.json';
 
 const app: Application = express();
@@ -31,7 +32,8 @@ app.use(passport.session());
 app.use('/api/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Application Routes
-app.use('api/auth', authRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/mail', emailRoutes);
 
 // Home Routes
 app.get('/', (req: Request, res: Response) => {
