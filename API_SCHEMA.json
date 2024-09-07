@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "HNG Boilerplate API",
+    "title": "Chatter Backend API",
     "version": "1.0.0",
-    "description": "API documentation for the HNG boilerplate project."
+    "description": "API documentation for the chatter backend project."
   },
   "servers": [
     {
@@ -25,6 +25,10 @@
     {
       "name": "Authentication",
       "description": "Operations related to authentication"
+    },
+    {
+      "name": "Mailing",
+      "description": "Operations related to Mailing"
     },
     {
       "name": "Users",
@@ -135,6 +139,152 @@
           },
           "422": {
             "$ref": "#/components/responses/422"
+          }
+        }
+      }
+    },
+    "/auth/google": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Authenticate with Google",
+        "description": "Allows a user to register or login with google.",
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status_code": {
+                      "type": "number",
+                      "example": "201"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Authenticated successfully"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/User"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+
+          "403": {
+            "$ref": "#/components/responses/403"
+          }
+        }
+      }
+    },
+    "/mail/password-reset": {
+      "post": {
+        "tags": ["Mailing"],
+        "summary": "Send a password reset mail",
+        "description": "Allows a user to request for a password reset mail.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "firstName": {
+                    "type": "string"
+                  }
+                },
+                "required": ["email"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status_code": {
+                      "type": "number",
+                      "example": "200"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Password reset email sent successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+
+          "422": {
+            "$ref": "#/components/responses/422"
+          }
+        }
+      }
+    },
+    "/auth/facebook": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Authenticate with Facebook",
+        "description": "Allows a user to register or login with facebook.",
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status_code": {
+                      "type": "number",
+                      "example": "201"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Authenticated successfully"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/User"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+
+          "403": {
+            "$ref": "#/components/responses/403"
           }
         }
       }
