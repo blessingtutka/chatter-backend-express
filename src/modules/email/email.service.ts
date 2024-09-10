@@ -1,7 +1,6 @@
 import { getFile } from '../../helpers/file-manager';
 import HttpResponse from '../../helpers/http-response';
-import { mailTransporter } from '../../config/mailer.config';
-import nodemailer from 'nodemailer';
+import { sendMail } from './queue.service';
 
 export const getTemplate = async (templateInfo: { templateName: string }) => {
   try {
@@ -27,9 +26,7 @@ export const sendPasswordResetEmail = async (
   firstName: string,
 ): Promise<void> => {
   try {
-    const transporter = await mailTransporter();
-
-    const mailOptions = {
+    const mailOptions: EmailType = {
       from: '"Blessing Tutka" <no-reply@guideon.com>',
       to: email,
       subject: 'Password Reset Request',
@@ -40,10 +37,7 @@ export const sendPasswordResetEmail = async (
       },
     };
 
-    const mail = await transporter.sendMail(mailOptions);
-
-    console.log(`Password reset email sent to ${email}`);
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(mail));
+    await sendMail(mailOptions);
   } catch (error: any) {
     throw new Error(error);
   }
