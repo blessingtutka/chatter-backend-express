@@ -3,6 +3,8 @@ import { getUserByEmail } from '../modules/user/user.service';
 import { ValidationError } from './interfaces';
 
 interface UserInput {
+  user_id: string;
+  code: string;
   email: string;
   username: string;
   type: UserType;
@@ -49,4 +51,28 @@ const validateReset = (user: Partial<UserInput>): ValidationError[] => {
   return errors;
 };
 
-export { validateRegistration, validateLogin, validateReset };
+const validateOtpRequest = (user: Partial<UserInput>): ValidationError[] => {
+  const errors: ValidationError[] = [];
+  if (!user.email)
+    errors.push({ field: 'email', message: 'Email is required' });
+  return errors;
+};
+
+const validateOtpVerification = (
+  user: Partial<UserInput>,
+): ValidationError[] => {
+  const errors: ValidationError[] = [];
+  if (!user.email)
+    errors.push({ field: 'email', message: 'User Id is required' });
+  if (!user.code)
+    errors.push({ field: 'code', message: 'Otp code is required' });
+  return errors;
+};
+
+export {
+  validateRegistration,
+  validateLogin,
+  validateReset,
+  validateOtpRequest,
+  validateOtpVerification,
+};
