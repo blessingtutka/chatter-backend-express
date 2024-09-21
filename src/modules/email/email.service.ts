@@ -1,5 +1,6 @@
 import { getFile } from '../../helpers/file-manager';
 import HttpResponse from '../../helpers/http-response';
+import { addMinutes, differenceInMinutes } from 'date-fns';
 import { sendMail } from './queue.service';
 
 export const getTemplate = async (templateInfo: { templateName: string }) => {
@@ -26,7 +27,7 @@ export const sendPasswordResetEmail = async (
   firstName: string,
 ): Promise<void> => {
   try {
-    const mailOptions: EmailType = {
+    const mailOptions: ResetEmailType = {
       from: '"Blessing Tutka" <no-reply@guideon.com>',
       to: email,
       subject: 'Password Reset Request',
@@ -34,6 +35,32 @@ export const sendPasswordResetEmail = async (
       context: {
         firstName,
         resetLink,
+      },
+    };
+
+    await sendMail(mailOptions);
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
+export const sendOtpEmail = async (
+  email: string,
+  otpCode: string,
+  firstName: string,
+  expiresAt: Date,
+): Promise<void> => {
+  const expiresIn = differenceInMinutes(expiresAt, new Date());
+  try {
+    const mailOptions: OtpEmailType = {
+      from: '"Blessing Tutka" <no-reply@guideon.com>',
+      to: email,
+      subject: 'One Time Password',
+      template: 'send-otp',
+      context: {
+        firstName,
+        otpCode,
+        expiresIn,
       },
     };
 
