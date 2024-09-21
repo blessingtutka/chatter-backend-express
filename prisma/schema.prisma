@@ -30,6 +30,7 @@ model User {
   lastLoginAt DateTime? @map("last_login_at")
   isActive    Boolean   @default(true) @map("is_active")
   profile     Profile?
+  opt         Otp?
   
   @@index([username])
   @@index([email])
@@ -48,4 +49,14 @@ model Profile {
   user         User       @relation(fields: [userId], references: [userId], onDelete: Cascade)
   
   @@map("profile")
+}
+
+model Otp {
+  otpId       String     @id @default(cuid()) @map("otp_id")
+  code        String     @map("code")
+  expiresAt   DateTime   @map("expires_at")
+  userId      String     @unique @map("user_id")
+  user        User       @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
+  @@map("otp")
 }
