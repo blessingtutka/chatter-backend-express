@@ -69,3 +69,26 @@ export const sendOtpEmail = async (
     throw new Error(error);
   }
 };
+
+export const sendVerifyEmail = async (
+  email: string,
+  verificationLink: string,
+  firstName: string,
+): Promise<void> => {
+  try {
+    const mailOptions: EmailType = {
+      from: '"Blessing Tutka" <no-reply@guideon.com>',
+      to: email,
+      subject: 'Email Verification',
+      template: 'email-verification',
+      context: {
+        firstName,
+        verificationLink,
+      },
+    };
+
+    await sendMail(mailOptions);
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
