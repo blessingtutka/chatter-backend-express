@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <style>
+      body { font-family: Arial, sans-serif; background-color: #f6f6f6; margin:
+      0; padding: 0; } .container { width: 100%; max-width: 600px; margin: 20px
+      auto; background-color: #ffffff; padding: 20px; border-radius: 8px;
+      box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px; } .header {
+      text-align: center; padding: 20px 0; background-color: #14a0f9; color:
+      #ffffff; font-size: 24px; border-radius: 8px 8px 0 0; } .content {
+      padding: 20px; text-align: center; color: #333333; } .content p {
+      font-size: 16px; line-height: 1.5; margin: 20px 0; } .btn {
+      background-color: #14a0f9; color: #ffffff; padding: 10px 20px;
+      border-radius: 5px; text-decoration: none; font-size: 16px; display:
+      inline-block; } .footer { text-align: center; padding: 20px 0; font-size:
+      14px; color: #888888; } .footer a { color: #14a0f9; text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='header'>Email Verification</div>
+      <div class='content'>
+        <p>Hello {{firstName}},</p>
+        <p>
+          Thank you for registering with us. Please click the button below to
+          verify your email address:
+        </p>
+        <a href='{{verificationLink}}' class='btn'>Verify Email</a>
+        <p>
+          If you didn't create an account, you can safely ignore this email.
+        </p>
+      </div>
+      <div class='footer'>
+        <p>Need help? <a href='{{supportLink}}'>Contact Support</a></p>
+      </div>
+    </div>
+  </body>
+</html>
