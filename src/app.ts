@@ -5,9 +5,12 @@ import session from 'express-session';
 import swaggerUi from 'swagger-ui-express';
 import authConfig from './config/auth.config';
 import HttpResponse from './helpers/http-response';
+import { startOtpCrons } from './modules/otp/otp.crons';
+// Routes
 import authRoutes from './modules/auth/auth.routes';
 import emailRoutes from './modules/email/email.routes';
 import otpRoutes from './modules/otp/otp.routes';
+// API Schema
 import swaggerDocument from '../API_SCHEMA.json';
 
 const app: Application = express();
@@ -48,5 +51,8 @@ app.use((req: Request, res: Response) => {
   const response = HttpResponse.notFound();
   return response.send(res);
 });
+
+//Start otp crons
+startOtpCrons();
 
 export default app;
