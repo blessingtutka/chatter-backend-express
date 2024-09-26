@@ -72,3 +72,21 @@ export const findOpt = async (userId: string) => {
     await prisma.$disconnect();
   }
 };
+
+export const deleteExpiredOtps = async () => {
+  try {
+    const result = await optTable.deleteMany({
+      where: {
+        expiresAt: {
+          lt: new Date(),
+        },
+      },
+    });
+
+    return result;
+  } catch (error: any) {
+    throw new Error(`Error deleting expired otps: ${error.message}`);
+  } finally {
+    await prisma.$disconnect();
+  }
+};
