@@ -186,6 +186,49 @@
         }
       }
     },
+    "/auth/facebook": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Authenticate with Facebook",
+        "description": "Allows a user to register or login with facebook.",
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status_code": {
+                      "type": "number",
+                      "example": "201"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Authenticated successfully"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/User"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+
+          "403": {
+            "$ref": "#/components/responses/403"
+          }
+        }
+      }
+    },
     "/mail/password-reset": {
       "post": {
         "tags": ["Mailing"],
@@ -364,49 +407,6 @@
 
           "422": {
             "$ref": "#/components/responses/422"
-          }
-        }
-      }
-    },
-    "/auth/facebook": {
-      "post": {
-        "tags": ["Authentication"],
-        "summary": "Authenticate with Facebook",
-        "description": "Allows a user to register or login with facebook.",
-        "responses": {
-          "201": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status_code": {
-                      "type": "number",
-                      "example": "201"
-                    },
-                    "status": {
-                      "type": "string",
-                      "example": "success"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Authenticated successfully"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/User"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-
-          "403": {
-            "$ref": "#/components/responses/403"
           }
         }
       }
