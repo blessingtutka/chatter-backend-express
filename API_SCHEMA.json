@@ -246,6 +246,128 @@
         }
       }
     },
+    "/otp/request": {
+      "post": {
+        "tags": ["Mailing"],
+        "summary": "Send a opt code mail",
+        "description": "Allows a user to request for a otp code mail.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "firstName": {
+                    "type": "string"
+                  }
+                },
+                "required": ["email"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status_code": {
+                      "type": "number",
+                      "example": "200"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "opt code send email sent successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+
+          "422": {
+            "$ref": "#/components/responses/422"
+          }
+        }
+      }
+    },
+    "/otp/verification": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Verify Otp code",
+        "description": "Verify the entered user otp code ",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "code": {
+                    "type": "string",
+                    "pattern": "^[0-9]{6}$",
+                    "description": "OTP code should be a 6-digit number"
+                  }
+                },
+                "required": ["email", "code"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status_code": {
+                      "type": "number",
+                      "example": "200"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "success"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "opt code verified successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+
+          "422": {
+            "$ref": "#/components/responses/422"
+          }
+        }
+      }
+    },
     "/auth/facebook": {
       "post": {
         "tags": ["Authentication"],
