@@ -64,8 +64,15 @@ const validateOtpVerification = (
   const errors: ValidationError[] = [];
   if (!user.email)
     errors.push({ field: 'email', message: 'User Id is required' });
-  if (!user.code)
-    errors.push({ field: 'code', message: 'Otp code is required' });
+
+  if (!user.code) {
+    errors.push({ field: 'code', message: 'OTP code is required' });
+  } else if (!/^\d{6}$/.test(user.code)) {
+    errors.push({
+      field: 'code',
+      message: 'OTP code must be exactly 6 digits',
+    });
+  }
   return errors;
 };
 
