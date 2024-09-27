@@ -65,6 +65,11 @@ export const handleOtpVerification = async (req: Request, res: Response) => {
     }
 
     const isOtpValid = await otpService.verifyOpt(user.userId, code);
+
+    if (!isOtpValid) {
+      const response = HttpResponse.unAuthorized('Invalid OTP');
+      return response.send(res);
+    }
     const response = HttpResponse.success(null, 'OTP verified successfully');
     return response.send(res);
   } catch (error) {
