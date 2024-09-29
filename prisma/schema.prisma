@@ -31,6 +31,7 @@ model User {
   isActive    Boolean   @default(true) @map("is_active")
   profile     Profile?
   opt         Otp?
+  token       Token?
   
   @@index([username])
   @@index([email])
@@ -49,6 +50,16 @@ model Profile {
   user         User       @relation(fields: [userId], references: [userId], onDelete: Cascade)
   
   @@map("profile")
+}
+
+model Token {
+  tokenId       String     @id @default(cuid()) @map("token_id")
+  userId      String     @unique @map("user_id")
+  token       String
+  expiresAt   DateTime   @map("expires_at")
+  user         User       @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  
+  @@map("token")
 }
 
 model Otp {
