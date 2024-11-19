@@ -1,10 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import passport from '../config/passport.config';
-import isExpiredToken from '../utils/isexpired-token';
-import extractTokenFromHeader from '../utils/extract-token';
 import authConfig from '../config/auth.config';
 import HttpResponse from '../helpers/http-response';
+import { extractTokenFromHeader, isExpiredToken } from '../utils';
 
 interface AuthenticatedRequest extends Request {
   user?: string | jwt.JwtPayload;

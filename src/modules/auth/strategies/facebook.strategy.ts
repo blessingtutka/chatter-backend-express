@@ -2,7 +2,7 @@ import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { createAccount } from '../auth.service';
 import { getUserByEmail } from '../../user/user.service';
 import { Request, Response, NextFunction } from 'express';
-import { generateToken } from '../../../utils/generate-token';
+import { generateToken } from '../../../utils';
 import authConfig from '../../../config/auth.config';
 
 const facebookStartegy = new FacebookStrategy(

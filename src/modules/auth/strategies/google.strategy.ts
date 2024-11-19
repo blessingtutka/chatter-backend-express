@@ -1,6 +1,6 @@
 import { creategoogleAccount, getUserByGoogleId } from '../oauth.service';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-import { generateToken } from '../../../utils/generate-token';
+import { generateToken } from '../../../utils';
 import authConfig from '../../../config/auth.config';
 
 const googleStartegy = new GoogleStrategy(

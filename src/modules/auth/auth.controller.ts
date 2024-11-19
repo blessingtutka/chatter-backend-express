@@ -4,7 +4,7 @@ import {
   validateRegistration,
   validateLogin,
 } from '../../validator/auth.validators';
-import { generateToken } from '../../utils/generate-token';
+import { generateToken } from '../../utils';
 import HttpResponse from '../../helpers/http-response';
 
 const register = async (req: Request, res: Response) => {
@@ -14,9 +14,8 @@ const register = async (req: Request, res: Response) => {
 
   try {
     const user = await authService.createAccount(data);
-    const token = generateToken(user);
     const response = HttpResponse.success(
-      { access_token: token, user: user },
+      { user: user },
       'Accound created successfully',
     );
     return response.send(res);

@@ -7,12 +7,10 @@ import {
   validateOtpRequest,
   validateOtpVerification,
 } from '../../validator/auth.validators';
-import { addMinutes } from 'date-fns';
-import { generateOTP } from '../../utils/generate-otp';
+import { otpExpiresAt, generateOTP } from '../../utils';
 
 export const handleOtpRequest = async (req: Request, res: Response) => {
   const { email } = req.body;
-  const expiresAt = addMinutes(new Date(), 10);
 
   const errors = await validateOtpRequest(req.body);
   if (errors.length > 0) return res.status(422).json({ errors });
@@ -28,7 +26,7 @@ export const handleOtpRequest = async (req: Request, res: Response) => {
     const otp = await otpService.createOpt({
       userId: user?.userId,
       code: generateOTP(),
-      expiresAt: expiresAt,
+      expiresAt: otpExpiresAt,
     });
 
     await mailService.sendOtpEmail(
