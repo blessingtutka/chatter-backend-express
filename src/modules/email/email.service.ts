@@ -70,6 +70,32 @@ export const sendOtpEmail = async (
   }
 };
 
+export const sendClientMail = async (
+  email: string,
+  message: string,
+  name: string,
+  services: string[],
+): Promise<void> => {
+  try {
+    const mailOptions: EmailType = {
+      from: email,
+      to: '"Blessing Tutka" <no-reply@guideon.com>',
+      subject: 'New Client Message ',
+      template: 'client-message',
+      context: {
+        name,
+        email,
+        message,
+        services,
+      },
+    };
+
+    await sendMail(mailOptions);
+  } catch (error: any) {
+    throw new Error(error);
+  }
+};
+
 export const sendVerifyEmail = async (
   email: string,
   verificationLink: string,
