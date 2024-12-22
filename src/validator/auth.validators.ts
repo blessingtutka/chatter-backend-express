@@ -1,15 +1,6 @@
 import { UserType } from '../config/db.config';
 import { getUserByEmail } from '../modules/user/user.service';
-import { ValidationError } from './interfaces';
-
-interface UserInput {
-  user_id: string;
-  code: string;
-  email: string;
-  username: string;
-  type: UserType;
-  password: string;
-}
+import { ValidationError, UserInput } from './interfaces';
 
 const USER_TYPES: UserType[] = [
   UserType.ADMIN,
