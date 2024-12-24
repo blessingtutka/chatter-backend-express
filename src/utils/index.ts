@@ -1,7 +1,10 @@
 import isExpiredToken from './isexpired-token';
 import extractTokenFromHeader from './extract-token';
 import { generateOTP } from './generate-otp';
-import { generateToken } from './generate-token';
+import {
+  generateToken,
+  generateResetVerificationToken,
+} from './generate-token';
 import { otpExpiresAt } from './otp-expire';
 
 export {
@@ -9,5 +12,6 @@ export {
   extractTokenFromHeader,
   generateOTP,
   generateToken,
+  generateResetVerificationToken,
   otpExpiresAt,
 };

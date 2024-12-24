@@ -11,3 +11,9 @@ export const generateToken = (user: User): string => {
     },
   );
 };
+
+export const generateResetVerificationToken = (email: String): string => {
+  return jwt.sign({ email: email }, authConfig.jwt.secret, {
+    expiresIn: '3min',
+  });
+};
