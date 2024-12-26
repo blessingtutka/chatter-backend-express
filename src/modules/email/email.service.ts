@@ -24,7 +24,6 @@ export const getTemplate = async (templateInfo: { templateName: string }) => {
 export const sendPasswordResetEmail = async (
   email: string,
   resetLink: string,
-  firstName: string,
 ): Promise<void> => {
   try {
     const mailOptions: ResetEmailType = {
@@ -33,7 +32,6 @@ export const sendPasswordResetEmail = async (
       subject: 'Password Reset Request',
       template: 'reset-password',
       context: {
-        firstName,
         resetLink,
       },
     };
