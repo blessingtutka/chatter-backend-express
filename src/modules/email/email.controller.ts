@@ -3,19 +3,21 @@ import HttpResponse from '../../helpers/http-response';
 import * as mailService from '../email/email.service';
 import { validateReset } from '../../validator/auth.validators';
 import { validateClient } from '../../validator/client.validators';
+import { generateResetVerificationToken } from '../../utils';
 
 export const handlePasswordResetRequest = async (
   req: Request,
   res: Response,
 ) => {
-  const { email, firstName } = req.body;
-  const resetLink = 'https://chatter.com/reset-password?token=chatterToken';
+  const { email } = req.body;
+  const token = generateResetVerificationToken(email);
+  const resetLink = `https://chatter.com/reset-password?token=${token}`;
 
   const errors = await validateReset(req.body);
   if (errors.length > 0) return res.status(422).json({ errors });
 
   try {
-    await mailService.sendPasswordResetEmail(email, resetLink, firstName || '');
+    await mailService.sendPasswordResetEmail(email, resetLink);
     const response = HttpResponse.success(
       null,
       'Password reset email sent successfully',
@@ -51,8 +53,8 @@ export const handleClientMail = async (req: Request, res: Response) => {
 
 export const handleVerifyEmailRequest = async (req: Request, res: Response) => {
   const { email, firstName } = req.body;
-  const verificationLink =
-    'https://chatter.com/verify-email?token=chatterToken';
+  const token = generateResetVerificationToken(email);
+  const verificationLink = `https://chatter.com/verify-email?token=${token}`;
 
   const errors = await validateReset(req.body);
   if (errors.length > 0) return res.status(422).json({ errors });
