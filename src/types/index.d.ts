@@ -1,3 +1,28 @@
+// TYPES
+type AnyObject = { [key: string]: any };
+
+type TAccount = {
+  username: string;
+  email: string;
+  password: string;
+};
+
+type TUser = {
+  username?: string;
+  email?: string;
+  type?: string;
+  isActive?: boolean;
+};
+
+type TProfile = {
+  avatarUrl?: string;
+  firstName?: string;
+  lastName?: string;
+  dateOfBirth?: string;
+  gender?: string;
+  bio?: string;
+};
+
 type EmailType = {
   from: string;
   to: string;
