@@ -6,6 +6,7 @@ import {
   generateResetVerificationToken,
 } from './generate-token';
 import { otpExpiresAt } from './otp-expire';
+import { sanitizeInput } from './sanitize-input';
 
 export {
   isExpiredToken,
@@ -13,5 +14,6 @@ export {
   generateOTP,
   generateToken,
   generateResetVerificationToken,
+  sanitizeInput,
   otpExpiresAt,
 };
