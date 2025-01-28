@@ -4,13 +4,7 @@ const userModel = prisma.user;
 
 import bcrypt from 'bcrypt';
 
-interface CreateUserInput {
-  username: string;
-  email: string;
-  password: string;
-}
-
-async function createAccount(input: CreateUserInput) {
+async function createAccount(input: TAccount) {
   const { username, email, password } = input;
 
   try {
