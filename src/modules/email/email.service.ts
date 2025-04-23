@@ -78,7 +78,7 @@ export const sendClientMail = async (
     const mailOptions: EmailType = {
       from: email,
       to: '"Blessing Tutka" <no-reply@guideon.com>',
-      subject: 'New Client Message ',
+      subject: 'New Client Message',
       template: 'client-message',
       context: {
         name,
